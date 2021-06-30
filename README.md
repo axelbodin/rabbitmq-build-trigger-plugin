@@ -5,10 +5,33 @@ rabbitmq-build-trigger: RabbitMQ Build Trigger Plugin for Jenkins
 * Repository: http://github.com/jenkinsci/rabbitmq-build-trigger-plugin
 * Plugin Information: https://wiki.jenkins-ci.org/display/JENKINS/RabbitMQ+Build+Trigger+Plugin
 
+About this fork
+------------------------
+
+This fork is a minor tweak for the post build action that publishes the full project name instead of only the last part.
+
 Synopsis
 ------------------------
 
 rabbitmq-build-trigger is a Jenkins plugin to trigger build using application message for remote build in specific queue on RabbitMQ.
+
+Old Meesage body:
+```json
+{
+    "project": "FOLDER/PROJECTNAME",
+    "number": "BUILDNUMBER",
+    "status": "SUCCESS|FAILURE|UNSTABLE.."
+}
+```
+New meesage body:
+```json
+{
+    "project": "PROJECTNAME",
+    "number": "BUILDNUMBER",
+    "status": "SUCCESS|FAILURE|UNSTABLE.."
+}
+```
+Project name in old format is pretty much useless for automation (in example when you want to extract build parameters and other information using Python's Jenkins library)
 
 Usage
 ------------------------
